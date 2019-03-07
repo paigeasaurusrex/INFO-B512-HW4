@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<title>q's webpage</title>
+</head>
+
+<body>
+<br><br><br>
+<h1>Welcome to johnny's personal website</h1>
+
+<ul style="list-style-type: none">
+{% for project in projects %}
+
+    <li>
+		{{ project.Project_ID }} . {{ project.Project_Descrip }} &nbsp;&nbsp;--{{ project.Project_year }}
+    	<form action="{% url 'deleteproject' project.Project_ID %}" method="POST">{% csrf_token %}
+    		<button type="submit">Delete</button>
+		</form>
+    </li>
+{% endfor %}
+</ul>
+
+<br>
+<br>
+
+<ul style="list-style-type: none">
+{% for skill in skills %}
+
+    <li>
+		{{ skill.Skill_ID }} . {{ skill.Skill_Descrip }} &nbsp;&nbsp;--{{ skill.Skill_rank }}
+    	<form action="{% url 'deleteskill' skill.Skill_ID %}" method="POST">{% csrf_token %}
+    		<button type="submit">Delete</button>
+		</form>
+    </li>
+{% endfor %}
+</ul>
+<br><br>
+
+<form action="{% url 'insertproject' %}" method="POST">
+{% csrf_token %}
+Project ID:<input type="text" name="project_id" style="width: 30px;"><br>
+Project Description:<input type="text" name="project_descrip" style="width: 300px;"><br>
+Project Year:<input type="text" name="project_year" style="width: 50px;"><br>
+<input type="submit" value="Insert">
+<form>
+
+
+</body>
+
+</html>
